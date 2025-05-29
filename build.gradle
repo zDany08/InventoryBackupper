@@ -1,0 +1,40 @@
+plugins {
+    id "java"
+    id "io.github.goooler.shadow" version "8.1.8"
+}
+
+def packageName = "me.zdany.inventorybackupper"
+
+group = packageName
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+        content {
+            includeGroup "org.bukkit"
+            includeGroup "org.spigotmc"
+        }
+    }
+    maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url = "https://oss.sonatype.org/content/repositories/central" }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.21.5-R0.1-SNAPSHOT"
+    implementation "dev.triumphteam:triumph-gui:3.1.11"
+    implementation "org.json:json:20250517"
+}
+
+processResources {
+    filesMatching("plugin.yml") {
+        expand version: project.version
+    }
+}
+
+shadowJar {
+    relocate("dev.triumphteam.gui", "${packageName}.gui")
+    relocate("org.json", "${packageName}.json")
+    archiveFileName = "${project.name}-${project.version}.jar"
+}

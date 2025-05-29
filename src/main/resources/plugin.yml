@@ -1,0 +1,26 @@
+name: InventoryBackupper
+description: Backup player inventories.
+version: ${version}
+api-version: 1.21
+author: zDany
+main: me.zdany.inventorybackupper.InventoryBackupper
+commands:
+  inventorybackupper:
+    description: Main command.
+    aliases:
+      - inventoryb
+      - ibackupper
+      - ib
+permissions:
+  inventorybackupper.*:
+    description: All permissions.
+    default: op
+    children:
+      inventorybackupper.loadinv: true
+      inventorybackupper.interact: true
+  inventorybackupper.loadinv:
+    description: Allows to see players inventory.
+    default: op
+  inventorybackupper.interact:
+    description: Allows to take items from inventory backups.
+    default: op
